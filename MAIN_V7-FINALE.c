@@ -96,18 +96,20 @@ void Reception(void const* arg){
 						
 						angle = ((((angle2 << 8)|angle1)>>1)&0x7FFF)>>6;							//décalage et mise en forme des octets d'angle pour avoir qqch d'utile, division par 64 pour le traitement
 						distance = ((dist2<<8) | dist1) >>2;													//décalage et mise en forme des octets de distance pour avoir qqch d'utile, division par 4 pour le traitement
+					
+						distance = distance/10;					
 //						sprintf(tabDist,"angle %3d dist %5d",angle, distance);
 //						GLCD_DrawString(0, 0, tabDist);
 					
-		if (distance>2000)
+		if (distance>200)
 			{
-				distance=2000;																						//limite la valeur à 2m
+				distance=200;																						//limite la valeur à 2m
 			}
 		
 			
-			if (distance<=2000 && distance>=200 && angle>=0 && angle <=360)
+			if (distance<=200 && distance>=20 && angle>=0 && angle <=360)
 			{
-			sprintf(tabDist,"dist %5d mm    ", distance);								//Affichage DISTANCE HT					
+			sprintf(tabDist,"dist %5d cm    ", distance);								//Affichage DISTANCE HT					
 			while(Driver_USART1.GetStatus().tx_busy == 1); 								// attente buffer TX vide
 			Driver_USART1.Send((const void*)tabDist,strlen(tabDist));
 
@@ -118,7 +120,7 @@ void Reception(void const* arg){
 			
 			
 	if(angle>0 && angle <=45){																			//angle de 0° à 45°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 //		sprintf(tabDist,"angle %3d dist %5d",angle, distance);
 //		GLCD_DrawString(0, 0, tabDist);
@@ -129,7 +131,7 @@ void Reception(void const* arg){
 	}
 
 	if(angle>45 && angle <=90){																			//angle de 45° à 90°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -137,7 +139,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>90 && angle <=135){																			//angle de 90° à 135°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -145,7 +147,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>135 && angle <=180){																			//angle de 135° à 180°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -153,7 +155,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>180 && angle <=225){																			//angle de 180° à 225°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -161,7 +163,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>225 && angle <=270){																			//angle de 225° à 270°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -169,7 +171,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>270 && angle <=315){																			//angle de 270° à 315°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -177,7 +179,7 @@ void Reception(void const* arg){
 		}
 	}
 	if(angle>315 && angle <=360){																			//angle de 315° à 360°
-		if(distance>200 && distance <=2000)														//distance entre 20cm et 2m
+		if(distance>20 && distance <=200)														//distance entre 20cm et 2m
 		{
 			//
 			//instructions
@@ -235,3 +237,4 @@ void Init_UART1(void){																					//HyperTerminal
 	Driver_USART1.Control(ARM_USART_CONTROL_TX,1);
 	Driver_USART1.Control(ARM_USART_CONTROL_RX,1);
 }
+
