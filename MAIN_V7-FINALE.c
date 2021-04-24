@@ -84,7 +84,7 @@ void Reception(void const* arg){
 		
 		while(Driver_USART0.GetRxCount() < 1);				
 			for (i=0;i<5;i++){						
-				if (((tabR[i]&0x3E)==0x3E)&&((tabR[i+1]&0x01)==0x01)){					//masquage des trames de mauvaise qualité et du checksum	
+				if (((tabR[i]&0x3E)==0x3E)&&((tabR[i+1]&0x01)==0x01)){		//masquage des trames de mauvaise qualité et du checksum	
 						
 						//sprintf(LCD,"%02x %02x %02x %02x %02x",tabR[i],tabR[i+1],tabR[i+2],tabR[i+3],tabR[i+4]);																//Affichage sans traitement des octets(qualité - angle_1 - angle_2 - distance_1 - distance_2 )
 						//GLCD_DrawString(0, 0, LCD);
@@ -94,7 +94,7 @@ void Reception(void const* arg){
 						dist1=tabR[i+3];
 						dist2=tabR[i+4];
 						
-						angle = ((((angle2 << 8)|angle1)>>1)&0x7FFF)>>6;							//décalage et mise en forme des octets d'angle pour avoir qqch d'utile, division par 64 pour le traitement
+						angle = ((((angle2 << 8)|angle1)>>1)&0x7FFF)>>6;			//décalage et mise en forme des octets d'angle pour avoir qqch d'utile, division par 64 pour le traitement
 						distance = ((dist2<<8) | dist1) >>2;													//décalage et mise en forme des octets de distance pour avoir qqch d'utile, division par 4 pour le traitement
 					
 						distance = distance/10;					
